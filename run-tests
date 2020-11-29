@@ -1,0 +1,15 @@
+#! /bin/bash
+
+where_am_i="${0%/*}"
+
+nosetests --with-doctest
+
+# Enforce PEP8 coding conventions
+pycodestyle --show-source --filename=* \
+   --exclude \
+       ".git,.gitignore,__pycache__,
+       LICENSE,
+       README.md,
+       requirements*.txt,\
+       run-tests" \
+       "${where_am_i}"
