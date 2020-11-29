@@ -1,6 +1,6 @@
 # atop-to-json
 
-**Convert atop text logfiles to JSON.**
+**Convert Atop text log files to JSON.**
 
 Compatible with **Atop 2.5.0**, please use `atopconvert` to convert older raw log files or feel free to send a pull request to add support to a newer version of Atop.
 
@@ -28,8 +28,6 @@ JSON format is easily processable by tools like [jq](https://stedolan.github.io/
 No installation required.
 
 ## Usage
-
-This repository contains a set of basic tools generating JSON. They can be combined using [jq](https://stedolan.github.io/jq/) to deal with more complex use cases, see example shell scripts in [tools/](tools/).
 
 ```bash
 ./atop-to-json -i capture.txt
