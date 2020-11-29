@@ -30,7 +30,11 @@ No installation required.
 ## Usage
 
 ```bash
+# Convert everything
 ./atop-to-json -i capture.txt
+
+# Convert specific Atop labels
+./atop-to-json -i capture.txt -P CPU,MEM,PRC
 ```
 
 ## Contributing

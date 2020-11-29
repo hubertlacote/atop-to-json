@@ -9,7 +9,7 @@ from core import atop
 from core import common
 
 
-def load_atop(input_filepath):
+def load_atop(input_filepath, requested_labels):
     output = []
 
     logging.info("Loading atop file '{0}'".format(input_filepath))
@@ -26,6 +26,9 @@ def load_atop(input_filepath):
                 since_boot = False
 
             else:
+                if requested_labels and label not in requested_labels:
+                    continue
+
                 fields = atop.split_line(line)
 
                 if label == "NET":
@@ -51,12 +54,18 @@ def load_atop(input_filepath):
 
 if __name__ == "__main__":
 
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument(
         '-i', dest='input_filepath', action='store',
         help="Input atop file (e.g. capture.txt)")
     parser.add_argument(
+        '-P', dest='labels', action='store',
+        default="ALL",
+        help="Labels to process, comma separated (e.g. -P CPU,MEM,PRC)")
+    parser.add_argument(
         '-v', dest='verbose', action='store_true',
+        default=False,
         help="Print details")
     args = parser.parse_args()
 
@@ -69,11 +78,20 @@ if __name__ == "__main__":
             args.input_filepath))
         sys.exit(1)
 
+    if args.labels != "ALL":
+        requested_labels = set(args.labels.strip().split(","))
+        for label in requested_labels:
+            if label not in atop.MAPPING:
+                logging.error("Label '{0}' not supported".format(label))
+                sys.exit(1)
+    else:
+        requested_labels = None
+
     if args.verbose:
         common.configure(logging.DEBUG)
     else:
         common.configure(logging.INFO)
 
-    output = load_atop(args.input_filepath)
+    output = load_atop(args.input_filepath, requested_labels)
 
     print(common.prettify(output))
