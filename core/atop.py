@@ -6,7 +6,7 @@ MAPPING = {
     "CPU": [
         "", "", "epoch", "", "", "interval",
         "ticks_per_second",
-        "processor_number",
+        "processor_count",
         "cpu_system_ticks",
         "cpu_user_ticks",
         "cpu_user_niced_ticks",
@@ -43,11 +43,11 @@ MAPPING = {
 
     "CPL": [
         "", "", "epoch", "", "", "interval",
-        "processor_number",
+        "processor_count",
         "load_average_last_1_min",
         "load_average_last_5_min",
         "load_average_last_15_min",
-        "context_switches_number",
+        "context_switches_count",
         "device_interrupts"
     ],
 
@@ -60,7 +60,7 @@ MAPPING = {
         "memory_busy_percentage_last_1_sec",
         "total_memory_kilo_bytes",
         "used_memory_kilo_bytes",
-        "sample_number",
+        "sample_count",
         "gpu_busy_percentage",
         "memory_busy_percentage",
         "memory_occupation"
@@ -81,7 +81,7 @@ MAPPING = {
         "resident_memory_pages",
         "swapped_shared_memory_pages",
         "huge_page_size_bytes",
-        "huge_pages_number",
+        "huge_pages_count",
         "free_huge_pages"
     ],
 
@@ -98,8 +98,8 @@ MAPPING = {
     "PAG": [
         "", "", "epoch", "", "", "interval",
         "page_size_bytes",
-        "page_scan_number",
-        "allocstalls_number",
+        "page_scan_count",
+        "allocstalls_count",
         "",
         "swapins",
         "swapouts"
@@ -134,9 +134,9 @@ MAPPING = {
         "", "", "epoch", "", "", "interval",
         "name",
         "io_spent_ms",
-        "reads_number",
+        "reads_count",
         "sectors_read",
-        "writes_number",
+        "writes_count",
         "sectors_write"
     ],
 
@@ -144,9 +144,9 @@ MAPPING = {
         "", "", "epoch", "", "", "interval",
         "name",
         "io_spent_ms",
-        "reads_number",
+        "reads_count",
         "sectors_read",
-        "writes_number",
+        "writes_count",
         "sectors_write"
     ],
 
@@ -154,9 +154,9 @@ MAPPING = {
         "", "", "epoch", "", "", "interval",
         "name",
         "io_spent_ms",
-        "reads_number",
+        "reads_count",
         "sectors_read",
-        "writes_number",
+        "writes_count",
         "sectors_write"
     ],
 
@@ -245,7 +245,7 @@ MAPPING = {
         "real_uid",
         "real_gid",
         "tgid",
-        "thread_number",
+        "thread_count",
         "exit_code",
         "start_time_epoch",
         "command_line",
@@ -325,9 +325,9 @@ MAPPING = {
         "state",
         "obsoleted_kernel_patch",
         "standard_io_stats_used",
-        "read_number",
+        "read_count",
         "read_sectors",
-        "write_number",
+        "write_count",
         "written_sectors",
         "cancelled_written_sectors",
         "tgid",
