@@ -45,6 +45,7 @@ def load_atop(input_filepath, requested_labels):
                         if headers[i] != ""}
 
                     if len(entry) > 0:
+                        logging.debug(common.prettify(entry))
                         entry["label"] = label
                         entry["since_boot"] = since_boot
                         output.append(entry)
