@@ -3,6 +3,7 @@
 import argparse
 import logging
 import os
+import re
 import sys
 
 from core import atop
@@ -40,7 +41,7 @@ def load_atop(input_filepath, requested_labels):
 
                     logging.debug(line)
                     entry = {
-                        headers[i]: fields[i]
+                        headers[i]: re.sub(r'^\((.*)\)$', r'\1', fields[i])
                         for i in range(0, len(headers))
                         if headers[i] != ""}
 
