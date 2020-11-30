@@ -26,14 +26,14 @@ def load_atop(input_filepath, requested_labels):
                 since_boot = False
 
             else:
-                if requested_labels and label not in requested_labels:
-                    continue
-
                 fields = atop.split_line(line)
 
                 if label == "NET":
                     if fields[atop.NET_INTERFACE_FIELD] == "upper":
                         label = "NET-upper"
+
+                if requested_labels and label not in requested_labels:
+                    continue
 
                 if label in atop.MAPPING:
                     headers = atop.MAPPING[label]
