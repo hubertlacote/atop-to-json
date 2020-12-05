@@ -370,12 +370,45 @@ NET_INTERFACE_FIELD = 6
 def split_line(line):
     """
     >>> split_line(
+    ... 'BAR host 1608485685 basic n')
+    ['BAR', 'host', '1608485685', 'basic', 'n']
+    >>> split_line(
     ... 'FOO host-name 2020/11/28 19:10:33 (Descriptive Name-1) 123 () 10 '
     ... '(Other name-2) 20 -')
     ['FOO', 'host-name', '2020/11/28', '19:10:33', '(Descriptive Name-1)', \
 '123', '()', '10', '(Other name-2)', '20', '-']
+    >>> split_line(
+    ... 'PRC host-name 1606485650 2020/11/27 14:00:50 5 6270 (Thread (name)) '
+    ... 'S 100 0 0 0 120 0 0 0 0 6181 n')
+    ['PRC', 'host-name', '1606485650', '2020/11/27', '14:00:50', '5', '6270', \
+'(Thread (name))', 'S', '100', '0', '0', '0', '120', '0', '0', '0', '0', \
+'6181', 'n']
+    >>> split_line(
+    ... 'PRG host 1606485645 2020/11/27 14:00:45 14156 5005 (process) S 31756 '
+    ... '31756 5005 19 0 1606471546 (/bin/process --param Long (with) '
+    ... '(unclosed brackets) 5004 0 18 1 31756 31756 31756 31756 31756 31756 '
+    ... '0 y 0 0 -')
+    ['PRG', 'host', '1606485645', '2020/11/27', '14:00:45', '14156', '5005', \
+'(process)', 'S', '31756', '31756', '5005', '19', '0', '1606471546', \
+'(/bin/process --param Long (with) (unclosed brackets)', '5004', '0', '18', \
+'1', '31756', '31756', '31756', '31756', '31756', '31756', '0', 'y', '0', \
+'0', '-']
     """
+
     # Fields are space separated and
     # process names / arguments are enclosed in brackets
-    fields = re.findall(r"\([^\(]+\)|[^ ]+", line)
-    return fields
+    fields = line.split(" ")
+    if fields[0] == "PRG":
+        output = []
+        output.extend(fields[0:15])
+        output.append(" ".join(fields[15:-15]))
+        output.extend(fields[-15:])
+        return output
+    elif fields[0] == "PRC":
+        output = []
+        output.extend(fields[0:7])
+        output.append(" ".join(fields[7:-12]))
+        output.extend(fields[-12:])
+        return output
+    else:
+        return re.findall(r"\([^\(]+\)|[^ ]+", line)
