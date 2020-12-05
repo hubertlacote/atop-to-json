@@ -27,6 +27,7 @@ def load_atop(input_filepath, requested_labels):
                 since_boot = False
 
             else:
+                logging.debug(line)
                 fields = atop.split_line(line)
 
                 if label == "NET":
@@ -39,7 +40,6 @@ def load_atop(input_filepath, requested_labels):
                 if label in atop.MAPPING:
                     headers = atop.MAPPING[label]
 
-                    logging.debug(line)
                     entry = {
                         headers[i]: re.sub(r'^\((.*)\)$', r'\1', fields[i])
                         for i in range(0, len(headers))
